@@ -580,6 +580,10 @@ inputs:
     description: Additional details
     default: <default-value>
 
+  plugin_reactions_filter:
+    description: Filter reaction categories by count or percentage
+    default: ""
+
   plugin_reactions_ignored:
     description: Ignored users
     default: <default-value>

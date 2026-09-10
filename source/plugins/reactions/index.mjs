@@ -1,3 +1,5 @@
+import {filterReactions} from "./filter.mjs"
+
 //Setup
 export default async function({login, q, imports, data, graphql, queries, account}, {enabled = false, extras = false} = {}) {
   //Plugin execution
@@ -7,7 +9,7 @@ export default async function({login, q, imports, data, graphql, queries, accoun
       return null
 
     //Load inputs
-    let {limit: _limit1, "limit.issues": _limit2, "limit.discussions": _limit3, "limit.discussions.comments": _limit4, days, details, display, ignored} = imports.metadata.plugins.reactions.inputs({data, account, q})
+    let {limit: _limit1, "limit.issues": _limit2, "limit.discussions": _limit3, "limit.discussions.comments": _limit4, days, details, display, filter, ignored} = imports.metadata.plugins.reactions.inputs({data, account, q})
     ignored.push(...data.shared["users.ignored"])
 
     //Load issue comments
@@ -53,11 +55,13 @@ export default async function({login, q, imports, data, graphql, queries, accoun
     for (const [key, value] of Object.entries(list))
       list[key] = {value, percentage: value / reactions.length, score: value / (display === "relative" ? max : reactions.length)}
 
+    const visible = filterReactions(list, filter, imports.filters.github)
+
     //Compute total reactions
     const total = Object.values(list).map(({value}) => value).reduce((a, b) => a + b, 0)
 
     //Results
-    return {list, total, comments: comments.length, details, days, twemoji: q["config.twemoji"]}
+    return {list, visible, filter, total, comments: comments.length, details, days, twemoji: q["config.twemoji"]}
   }
   //Handle errors
   catch (error) {

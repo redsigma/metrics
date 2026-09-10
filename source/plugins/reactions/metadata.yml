@@ -80,6 +80,14 @@ inputs:
       - count
       - percentage
 
+  plugin_reactions_filter:
+    description: |
+      Filter reaction categories by count or percentage
+
+      Uses GitHub query syntax with `reactions.count` and `reactions.percentage`, for example `reactions.percentage:>10`.
+    type: string
+    default: ""
+
   plugin_reactions_ignored:
     description: |
       Ignored users
