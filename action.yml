@@ -846,6 +846,10 @@ inputs:
     description: Display limit
     default: <default-value>
 
+  plugin_activity_unique:
+    description: Keep at most one activity entry per repository
+    default: no
+
   plugin_activity_load:
     description: Events to load
     default: <default-value>

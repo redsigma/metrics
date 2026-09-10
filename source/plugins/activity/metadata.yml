@@ -27,6 +27,14 @@ inputs:
     min: 1
     max: 1000
 
+  plugin_activity_unique:
+    description: |
+      Keep at most one activity entry per repository
+
+      If enabled, fewer entries may be displayed when there are not enough unique repositories.
+    type: boolean
+    default: no
+
   plugin_activity_load:
     description: |
       Events to load

@@ -1,3 +1,5 @@
+import {uniqueActivity} from "./unique.mjs"
+
 //Setup
 export default async function({login, data, rest, q, account, imports}, {enabled = false, markdown = "inline", extras = false} = {}) {
   //Plugin execution
@@ -15,7 +17,7 @@ export default async function({login, data, rest, q, account, imports}, {enabled
     }
 
     //Load inputs
-    let {limit, load, days, filter, visibility, timestamps, skipped, ignored} = imports.metadata.plugins.activity.inputs({data, q, account})
+    let {limit, unique, load, days, filter, visibility, timestamps, skipped, ignored} = imports.metadata.plugins.activity.inputs({data, q, account})
     if (!days)
       days = Infinity
     skipped.push(...data.shared["repositories.skipped"])
@@ -56,7 +58,7 @@ export default async function({login, data, rest, q, account, imports}, {enabled
     }
 
     //Extract activity events
-    const activity = (await Promise.all(
+    let activity = (await Promise.all(
       events
         .filter(({actor}) => account === "organization" ? true : actor.login?.toLocaleLowerCase() === login.toLocaleLowerCase())
         .filter(({created_at}) => Number.isFinite(days) ? new Date(created_at) > new Date(Date.now() - days * 24 * 60 * 60 * 1000) : true)
@@ -204,7 +206,7 @@ export default async function({login, data, rest, q, account, imports}, {enabled
         }),
     ))
       .filter(event => event)
-      .slice(0, limit)
+    activity = uniqueActivity(activity, unique).slice(0, limit)
 
     //Results
     return {timestamps, events: activity}
