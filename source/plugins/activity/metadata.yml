@@ -19,6 +19,12 @@ inputs:
     type: boolean
     default: no
 
+  plugin_activity_show_empty:
+    description: |
+      Show an empty activity section when there is no activity
+    type: boolean
+    default: yes
+
   plugin_activity_limit:
     description: |
       Display limit

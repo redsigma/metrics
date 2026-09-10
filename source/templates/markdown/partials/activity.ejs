@@ -1,4 +1,4 @@
-<%_ if (plugins.activity) { _%>
+<%_ if ((plugins.activity)&&((plugins.activity.events.length)||(plugins.activity.show_empty)||(plugins.activity.error))) { _%>
 **[📰 Recent activity](https://github.com/<%= user.login %>)**
   <%_ if (plugins.activity.error) { _%>
 <%= plugins.activity.error.message _%>

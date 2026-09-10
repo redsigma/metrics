@@ -846,6 +846,10 @@ inputs:
     description: Enable activity plugin
     default: <default-value>
 
+  plugin_activity_show_empty:
+    description: Show an empty activity section when there is no activity
+    default: <default-value>
+
   plugin_activity_limit:
     description: Display limit
     default: <default-value>
