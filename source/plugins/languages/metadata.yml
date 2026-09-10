@@ -22,6 +22,12 @@ inputs:
     type: boolean
     default: no
 
+  plugin_languages_show_count:
+    description: |
+      Show the number of unique languages
+    type: boolean
+    default: no
+
   plugin_languages_ignored:
     description: |
       Ignored languages

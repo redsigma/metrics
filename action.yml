@@ -277,6 +277,10 @@ inputs:
     description: Enable languages plugin
     default: <default-value>
 
+  plugin_languages_show_count:
+    description: Show the number of unique languages
+    default: <default-value>
+
   plugin_languages_ignored:
     description: Ignored languages
     default: <default-value>
