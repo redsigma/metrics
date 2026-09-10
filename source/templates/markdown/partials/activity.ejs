@@ -17,7 +17,7 @@
       <%_ } else if (type === "push") { _%>
 * ➡️ Pushed <%= event.size %> commit<%= s(event.size) %> in [<%= repo %>](https://github.com/<%= repo %>) <%= event.branch ? `on branch \`${event.branch}\`` : "" %>
         <%_ for (const commit of event.commits) { _%>
-  * [#<%= commit.sha %>](https://github.com/<%= repo %>/commit/<%= commit.sha %>) <%= commit.message %>
+  * [#<%= commit.sha %>](https://github.com/<%= repo %>/commit/<%= commit.sha %>)<%_ if (plugins.activity.commit_messages) { _%> <%= (commit.message ?? "").split(/\r?\n/, 1)[0] %><%_ } _%>
         <%_ } _%>
       <%_ } else if (type === "issue") { _%>
 * #️⃣ <%- event.action === "opened" ? "Opened" : event.action === "reopened" ? "Reopened" : "Closed" %> [#<%= event.number %> <%= event.title %>](https://github.com/<%= repo %>/issues/<%= event.number %>) in [<%= repo %>](https://github.com/<%= repo %>)

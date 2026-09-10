@@ -850,6 +850,10 @@ inputs:
     description: Show an empty activity section when there is no activity
     default: <default-value>
 
+  plugin_activity_commit_messages:
+    description: Show the first line of each pushed commit message
+    default: <default-value>
+
   plugin_activity_limit:
     description: Display limit
     default: <default-value>

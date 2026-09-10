@@ -1,5 +1,7 @@
 import {uniqueActivity} from "./unique.mjs"
 
+export const formatActivityCommits = commits => commits.reverse().map(({sha, commit: {message}}) => ({sha: sha.substring(0, 7), message}))
+
 //Setup
 export default async function({login, data, rest, q, account, imports}, {enabled = false, markdown = "inline", extras = false} = {}) {
   //Plugin execution
@@ -182,7 +184,7 @@ export default async function({login, data, rest, q, account, imports}, {enabled
                 return null
               if (commits.slice(-1).pop()?.commit.message.startsWith("Merge branch "))
                 commits = commits.slice(-1)
-              return {type: customType, actor, timestamp, repo, size, branch: ref.match(/refs.heads.(?<branch>.*)/)?.groups?.branch ?? null, commits: commits.reverse().map(({sha, message}) => ({sha: sha.substring(0, 7), message}))}
+              return {type: customType, actor, timestamp, repo, size, branch: ref.match(/refs.heads.(?<branch>.*)/)?.groups?.branch ?? null, commits: formatActivityCommits(commits)}
             }
             //Released
             case "ReleaseEvent": {

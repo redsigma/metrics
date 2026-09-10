@@ -25,6 +25,12 @@ inputs:
     type: boolean
     default: yes
 
+  plugin_activity_commit_messages:
+    description: |
+      Show the first line of each pushed commit message
+    type: boolean
+    default: no
+
   plugin_activity_limit:
     description: |
       Display limit

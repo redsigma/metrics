@@ -137,7 +137,9 @@
                     <% for (const commit of event.commits) { %>
                       <div class="commit">
                         <div class="sha">#<%= commit.sha %></div>
-                        <div class="message"><%= commit.message %></div>
+                        <% if (plugins.activity.commit_messages) { %>
+                          <div class="message"><%= (commit.message ?? "").split(/\r?\n/, 1)[0] %></div>
+                        <% } %>
                       </div>
                     <% } %>
                   </div>
